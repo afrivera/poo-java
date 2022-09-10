@@ -17,6 +17,10 @@ public class EjemploAutomovil {
 
         // comparando diferentes objetos
         System.out.println(nissan.equals(date));
+        System.out.println(nissan); // tostring implicita
+        System.out.println(nissan.toString()); // tostring explicita
+
+
         System.out.println("son iguales= " + (nissan == nissan2));
         System.out.println("son iguales equals= " + (nissan.equals(nissan2)));
         System.out.println("son iguales equals= " + (automovil.equals(nissan)));

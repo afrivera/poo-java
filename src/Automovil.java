@@ -120,4 +120,16 @@ public class Automovil {
                 && this.fabricante.equals(a.getFabricante())
                 && this.modelo.equals(a.getModelo()));
     }
+
+    // representar el objeto de salida en un string
+    @Override
+    public String toString() {
+        return "Automovil{" +
+                "fabricante='" + fabricante + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", color='" + color + '\'' +
+                ", cilindrada=" + cilindrada +
+                ", capacidadTanque=" + capacidadTanque +
+                '}';
+    }
 }
