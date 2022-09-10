@@ -7,43 +7,65 @@ public class Automovil {
     private double cilindrada;
     private int capacidadTanque = 40;
 
-    public String leerFabricante(){
-        return this.fabricante;
-    }
 
-    public void asignarFabricante(String fabricante){
+    public Automovil(){}
+    public Automovil(String fabricante, String modelo){
         this.fabricante = fabricante;
-    }
-
-    public String leerModelo(){
-        return this.modelo;
-    }
-
-    public void asignarModelo(String modelo){
         this.modelo = modelo;
     }
 
-    public String leerColor(){
-        return this.color;
-    }
-
-    public void asignarColor(String color){
+    public Automovil(String fabricante, String modelo, String color){
+        this(fabricante, modelo);
         this.color = color;
     }
 
-    public double leerCilindrada(){
-        return this.cilindrada;
-    }
-
-    public void asignarCilindrada(double cilindrada){
+    public Automovil(String fabricante, String modelo, String color, double cilindrada) {
+        this(fabricante, modelo, color);
         this.cilindrada = cilindrada;
     }
 
-    public int leerCapacidadTanque(){
-        return this.capacidadTanque;
+    public Automovil(String fabricante, String modelo, String color, double cilindrada, int capacidadTanque) {
+        this(fabricante, modelo, color, cilindrada);
+        this.capacidadTanque = capacidadTanque;
     }
 
-    public void asignarCapacidadTanque(int capacidadTanque){
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public double getCilindrada() {
+        return cilindrada;
+    }
+
+    public void setCilindrada(double cilindrada) {
+        this.cilindrada = cilindrada;
+    }
+
+    public int getCapacidadTanque() {
+        return capacidadTanque;
+    }
+
+    public void setCapacidadTanque(int capacidadTanque) {
         this.capacidadTanque = capacidadTanque;
     }
 
@@ -55,8 +77,8 @@ public class Automovil {
 //        System.out.println("color = " + this.color);
 //        System.out.println("cilindrada = " + this.cilindrada);
         StringBuilder sb = new StringBuilder();
-        sb.append("Fabricante: " + this.fabricante);
-        sb.append("\nmodelo: " + this.modelo);
+        sb.append("Fabricante: " + this.getFabricante());
+        sb.append("\nmodelo: " + this.getModelo());
         sb.append("\ncolor: " + this.color);
         sb.append("\ncilindrada: " + this.cilindrada);
         return sb.toString();
@@ -84,4 +106,18 @@ public class Automovil {
         return km / (porcentajeBencina* (this.capacidadTanque / 100f));
     }
 
+    // override de method equals
+    @Override
+    public boolean equals(Object obj) {
+        if( this == obj){
+            return true;
+        }
+        if(!(obj instanceof Automovil)){
+            return false;
+        }
+        Automovil a = (Automovil) obj;
+        return (this.fabricante !=null && this.modelo != null
+                && this.fabricante.equals(a.getFabricante())
+                && this.modelo.equals(a.getModelo()));
+    }
 }
