@@ -8,10 +8,10 @@ public class EjemploAutomovil {
 
         auto.setCilindrada(2.0);
 
-        Automovil mazda = new Automovil("Mazda", "BT-50", "rojo", 3.0);
+        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO, 3.0);
 
-        Automovil nissan = new Automovil("Nissan", "Navara", "Gris oscuro", 3.5, 50);
-        Automovil nissan2 = new Automovil("Nissan", "Navara", "Gris oscuro", 3.5, 50);
+        Automovil nissan = new Automovil("Nissan", "Navara", Color.GRIS, 3.5, 50);
+        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS, 3.5, 50);
 
         Automovil automovil = new Automovil();
 
