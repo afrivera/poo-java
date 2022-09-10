@@ -1,15 +1,40 @@
 public class Automovil {
     // no lleva main
     // - Atributos
+    private int id;
     private String fabricante;
     private String modelo;
     private String color = "gris";
     private double cilindrada;
     private int capacidadTanque = 40;
 
+    // atributos estaticos no pertenece a la instancia, atributo generico
+    private static String colorPatente = "Naranja";
+    private static int capacidadTanqueEstatico = 30;
+    private static int ultimoId;
 
-    public Automovil(){}
+    // un atributo estatico debe tener get y set staticos
+    public static String getColorPatente(){
+        return colorPatente;
+    }
+
+    public static void setColorPatente(String colorPatente){
+        Automovil.colorPatente = colorPatente;
+    }
+
+    public static int getCapacidadTanqueEstatico() {
+        return capacidadTanqueEstatico;
+    }
+
+    public static void setCapacidadTanqueEstatico(int capacidadTanqueEstatico) {
+        Automovil.capacidadTanqueEstatico = capacidadTanqueEstatico;
+    }
+
+    public Automovil(){
+        this.id = ++ultimoId;
+    }
     public Automovil(String fabricante, String modelo){
+        this();
         this.fabricante = fabricante;
         this.modelo = modelo;
     }
@@ -27,6 +52,14 @@ public class Automovil {
     public Automovil(String fabricante, String modelo, String color, double cilindrada, int capacidadTanque) {
         this(fabricante, modelo, color, cilindrada);
         this.capacidadTanque = capacidadTanque;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFabricante() {
@@ -71,16 +104,14 @@ public class Automovil {
 
     // funciones o métodos
     public String detalle(){
-        // dentro de una clase nunca debería imprimirse
-//        System.out.println("fabricante = " + this.fabricante);
-//        System.out.println("modelo = " + this.modelo);
-//        System.out.println("color = " + this.color);
-//        System.out.println("cilindrada = " + this.cilindrada);
         StringBuilder sb = new StringBuilder();
-        sb.append("Fabricante: " + this.getFabricante());
+        sb.append("id = " + this.getId());
+        sb.append("\nFabricante: " + this.getFabricante());
         sb.append("\nmodelo: " + this.getModelo());
         sb.append("\ncolor: " + this.color);
         sb.append("\ncilindrada: " + this.cilindrada);
+        sb.append("\ncolorPatente: " + Automovil.colorPatente);
+
         return sb.toString();
     }
 
@@ -104,6 +135,11 @@ public class Automovil {
 
     public float calcularConsumo(int km, int porcentajeBencina){
         return km / (porcentajeBencina* (this.capacidadTanque / 100f));
+    }
+
+    // en un metodo estatico solo se pueden manejar atributos estaticos o propios del método
+    public static float calcularConsumoEstatico(int km, int porcentajeBencina){
+        return km / (Automovil.capacidadTanqueEstatico * (porcentajeBencina / 100f));
     }
 
     // override de method equals
@@ -132,4 +168,6 @@ public class Automovil {
                 ", capacidadTanque=" + capacidadTanque +
                 '}';
     }
+
+
 }
