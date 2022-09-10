@@ -6,12 +6,15 @@ public class EjemploAutomovil {
         Automovil auto = new Automovil("Subaru", "Impreza");
         Date date = new Date();
 
-        auto.setCilindrada(2.0);
+        auto.setMotor(new Motor(2.0, TipoMotor.BENCINA));// también se puede instanciar por fuera
+        Estanque estanque = new Estanque();
+        auto.setEstanque(estanque);
 
-        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO, 3.0);
+        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO, new Motor(3.0, TipoMotor.DIESEL));
+        mazda.setEstanque(new Estanque(45));
 
-        Automovil nissan = new Automovil("Nissan", "Navara", Color.GRIS, 3.5, 50);
-        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS, 3.5, 50);
+        Automovil nissan = new Automovil("Nissan", "Navara", Color.GRIS, new Motor(4.0, TipoMotor.DIESEL), new Estanque(50));
+        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS, new Motor(3.5, TipoMotor.BENCINA), new Estanque(50));
 
         Automovil automovil = new Automovil();
 

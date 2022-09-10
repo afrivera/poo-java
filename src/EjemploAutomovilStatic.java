@@ -4,19 +4,21 @@ public class EjemploAutomovilStatic {
 
         Automovil.setCapacidadTanqueEstatico(45);
         Automovil subaru = new Automovil("Subaru", "Impreza");
-        subaru.setCilindrada(2.0);
+        subaru.setMotor(new Motor(2.0, TipoMotor.DIESEL));
+        subaru.setEstanque(new Estanque(45));
         subaru.setColor(Color.BLANCO);
 
         // implementando Enum TipoAutomovil
         subaru.setTipo(TipoAutomovil.HATCHBACK);
 
 
-        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO, 3.0);
+        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO, new Motor(2.0, TipoMotor.DIESEL));
+        mazda.setEstanque(new Estanque(45));
         mazda.setTipo(TipoAutomovil.PICKUP);
 
-        Automovil nissan = new Automovil("Nissan", "Navara", Color.AZUL, 3.5, 50);
+        Automovil nissan = new Automovil("Nissan", "Navara", Color.AZUL, new Motor(3.0, TipoMotor.DIESEL), new Estanque(45));
         nissan.setTipo(TipoAutomovil.PICKUP);
-        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS, 3.5, 50);
+        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS, new Motor(3.0, TipoMotor.DIESEL), new Estanque(50));
         nissan2.setTipo(TipoAutomovil.PICKUP);
         // modificaría el patente static para todos
 //        Automovil.colorPatente = "Verde";

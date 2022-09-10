@@ -5,8 +5,11 @@ public class Automovil {
     private String fabricante;
     private String modelo;
     private Color color;
-    private double cilindrada;
-    private int capacidadTanque = 40;
+    // implementando asociaciones
+    private Motor motor;
+    private Estanque estanque;
+    private Persona conductor;
+    private Rueda[] ruedas;
 
     private TipoAutomovil tipo;
 
@@ -56,14 +59,20 @@ public class Automovil {
         this.color = color;
     }
 
-    public Automovil(String fabricante, String modelo, Color color, double cilindrada) {
+    public Automovil(String fabricante, String modelo, Color color, Motor motor) {
         this(fabricante, modelo, color);
-        this.cilindrada = cilindrada;
+        this.motor = motor;
     }
 
-    public Automovil(String fabricante, String modelo, Color color, double cilindrada, int capacidadTanque) {
-        this(fabricante, modelo, color, cilindrada);
-        this.capacidadTanque = capacidadTanque;
+    public Automovil(String fabricante, String modelo, Color color, Motor motor, Estanque estanque) {
+        this(fabricante, modelo, color, motor);
+        this.estanque = estanque;
+    }
+
+    public Automovil(String fabricante, String modelo, Color color, Motor motor, Estanque estanque, Persona conductor, Rueda[] ruedas) {
+        this(fabricante, modelo, color, motor, estanque);
+        this.conductor = conductor;
+        this.ruedas = ruedas;
     }
 
     public int getId() {
@@ -98,28 +107,44 @@ public class Automovil {
         this.color = color;
     }
 
-    public double getCilindrada() {
-        return cilindrada;
-    }
-
-    public void setCilindrada(double cilindrada) {
-        this.cilindrada = cilindrada;
-    }
-
-    public int getCapacidadTanque() {
-        return capacidadTanque;
-    }
-
-    public void setCapacidadTanque(int capacidadTanque) {
-        this.capacidadTanque = capacidadTanque;
-    }
-
     public TipoAutomovil getTipo() {
         return tipo;
     }
 
     public void setTipo(TipoAutomovil tipo) {
         this.tipo = tipo;
+    }
+
+    public Motor getMotor() {
+        return motor;
+    }
+
+    public void setMotor(Motor motor) {
+        this.motor = motor;
+    }
+
+    public Estanque getEstanque() {
+        return estanque;
+    }
+
+    public void setEstanque(Estanque estanque) {
+        this.estanque = estanque;
+    }
+
+    public Persona getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(Persona conductor) {
+        this.conductor = conductor;
+    }
+
+    public Rueda[] getRuedas() {
+        return ruedas;
+    }
+
+    public void setRuedas(Rueda[] ruedas) {
+        this.ruedas = ruedas;
     }
 
     // funciones o métodos
@@ -130,7 +155,7 @@ public class Automovil {
         sb.append("\nmodelo: " + this.getModelo());
         sb.append("\nTipo: " + this.getTipo().getNombre());
         sb.append("\ncolor: " + this.color.getColor());
-        sb.append("\ncilindrada: " + this.cilindrada);
+        sb.append("\ncilindrada: " + this.motor.getCilindrada());
         sb.append("\ncolorPatente: " + Automovil.colorPatente);
 
         return sb.toString();
@@ -151,11 +176,11 @@ public class Automovil {
     }
 
     public float calcularConsumo(int km, float porcentajeBencina){
-        return km / (porcentajeBencina* this.capacidadTanque);
+        return km / (porcentajeBencina* this.estanque.getCapacidad());
     }
 
     public float calcularConsumo(int km, int porcentajeBencina){
-        return km / (porcentajeBencina* (this.capacidadTanque / 100f));
+        return km / (porcentajeBencina* (this.estanque.getCapacidad() / 100f));
     }
 
     // en un metodo estatico solo se pueden manejar atributos estaticos o propios del método
@@ -185,8 +210,8 @@ public class Automovil {
                 "fabricante='" + fabricante + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", color='" + color + '\'' +
-                ", cilindrada=" + cilindrada +
-                ", capacidadTanque=" + capacidadTanque +
+                ", cilindrada=" + motor.getCilindrada() +
+                ", capacidadTanque=" + estanque.getCapacidad() +
                 '}';
     }
 
