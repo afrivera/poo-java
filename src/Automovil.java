@@ -1,4 +1,4 @@
-public class Automovil {
+public class Automovil implements Comparable<Automovil>{
     // no lleva main
     // - Atributos
     private int id;
@@ -10,6 +10,8 @@ public class Automovil {
     private Estanque estanque;
     private Persona conductor;
     private Rueda[] ruedas;
+
+    private int indiceRuedas = 0; // atributo para agregar mediante indice al array
 
     private TipoAutomovil tipo;
 
@@ -47,6 +49,7 @@ public class Automovil {
 
     public Automovil(){
         this.id = ++ultimoId;
+        this.ruedas = new Rueda[5];
     }
     public Automovil(String fabricante, String modelo){
         this();
@@ -124,6 +127,9 @@ public class Automovil {
     }
 
     public Estanque getEstanque() {
+        if(estanque==null){
+            this.estanque = new Estanque();
+        }
         return estanque;
     }
 
@@ -147,14 +153,27 @@ public class Automovil {
         this.ruedas = ruedas;
     }
 
+    public Automovil addRueda(Rueda rueda){
+        if(indiceRuedas< this.ruedas.length){
+            this.ruedas[indiceRuedas++] = rueda;
+        }
+
+        return this;
+    }
+
     // funciones o métodos
     public String detalle(){
         StringBuilder sb = new StringBuilder();
         sb.append("id = " + this.getId());
         sb.append("\nFabricante: " + this.getFabricante());
         sb.append("\nmodelo: " + this.getModelo());
-        sb.append("\nTipo: " + this.getTipo().getNombre());
-        sb.append("\ncolor: " + this.color.getColor());
+        if(this.getTipo()!=null){
+            sb.append("\nTipo: " + this.getTipo().getDescripcion());
+        }
+        if( this.getColor()!=null){
+            sb.append("\ncolor: " + this.color.getColor());
+
+        }
         sb.append("\ncilindrada: " + this.motor.getCilindrada());
         sb.append("\ncolorPatente: " + Automovil.colorPatente);
 
@@ -176,11 +195,11 @@ public class Automovil {
     }
 
     public float calcularConsumo(int km, float porcentajeBencina){
-        return km / (porcentajeBencina* this.estanque.getCapacidad());
+        return km / (porcentajeBencina* this.getEstanque().getCapacidad());
     }
 
     public float calcularConsumo(int km, int porcentajeBencina){
-        return km / (porcentajeBencina* (this.estanque.getCapacidad() / 100f));
+        return km / (porcentajeBencina* (this.getEstanque().getCapacidad() / 100f));
     }
 
     // en un metodo estatico solo se pueden manejar atributos estaticos o propios del método
@@ -206,14 +225,12 @@ public class Automovil {
     // representar el objeto de salida en un string
     @Override
     public String toString() {
-        return "Automovil{" +
-                "fabricante='" + fabricante + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", color='" + color + '\'' +
-                ", cilindrada=" + motor.getCilindrada() +
-                ", capacidadTanque=" + estanque.getCapacidad() +
-                '}';
+        return this.id + " : " + fabricante + " " + modelo;
     }
 
 
+    @Override
+    public int compareTo(Automovil a) {
+        return this.modelo.compareTo(a.modelo);
+    }
 }
